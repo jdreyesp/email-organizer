@@ -1,0 +1,17 @@
+{
+  "name": "email-organizer-routine",
+  "version": "1.0.0",
+  "description": "Claude Code Routine for intelligent email organization",
+  "type": "module",
+  "main": "email-organizer-routine.js",
+  "scripts": {
+    "start": "node email-organizer-routine.js",
+    "test": "node email-organizer-routine.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.35.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
