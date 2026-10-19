@@ -1,0 +1,1 @@
+{"timestamp":"2026-10-19T05:04:42.726Z","status":"error","error":"Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted"}
