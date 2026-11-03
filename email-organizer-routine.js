@@ -39,22 +39,12 @@ Start by connecting to Gmail and fetching the emails. Process them one by one, m
 
     // Call Claude with the email organization task
     const response = await client.messages.create({
-      model: "claude-opus-4-6",
+      model: "claude-opus-5-5",
       max_tokens: 4000,
-      thinking: {
-        type: "enabled",
-        budget_tokens: 2000,
-      },
       messages: [
         {
           role: "user",
           content: prompt,
-        },
-      ],
-      tools: [
-        {
-          type: "bash",
-          name: "bash",
         },
       ],
     });
