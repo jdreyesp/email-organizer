@@ -4,85 +4,57 @@
  * Email Organization Routine
  * Runs daily on Anthropic's cloud infrastructure
  * Connects to Gmail via MCP and intelligently organizes emails
+ *
+ * NOTE: This routine is designed to run as a Claude Code Session.
+ * It will be executed by Claude with access to Gmail MCP connector.
  */
 
-import Anthropic from "@anthropic-ai/sdk";
 import * as fs from "fs";
-
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 async function runEmailOrganization() {
   console.log("🚀 Starting Email Organization Routine...");
   console.log(`⏰ Timestamp: ${new Date().toISOString()}`);
 
   try {
-    // Read CLAUDE.md for system context
+    // Read CLAUDE.md for reference
     const claudeMd = fs.readFileSync("./CLAUDE.md", "utf-8");
 
-    // Create the prompt that Claude will execute
-    const prompt = `You are an email organization agent. Here are your instructions:
-
-${claudeMd}
-
-## Current Task
-Run your email organization process now:
-1. Use the Gmail MCP tool to fetch all unread emails from the last 24 hours
-2. Classify and organize each email according to the rules above
-3. Create the required labels if they don't exist
-4. Apply the appropriate actions (keep in inbox, archive + tag, delete)
-5. Mark emails as read after processing
-6. Report back with detailed statistics
-
-Start by connecting to Gmail and fetching the emails. Process them one by one, making decisions based on the classification rules. Be thorough and consistent.`;
-
-    // Call Claude with the email organization task
-    const response = await client.messages.create({
-      model: "claude-opus-4-6",
-      max_tokens: 4000,
-      thinking: {
-        type: "enabled",
-        budget_tokens: 2000,
-      },
-      messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      tools: [
-        {
-          type: "bash",
-          name: "bash",
-        },
-      ],
-    });
-
-    // Process the response
-    console.log("\n📊 Processing Results:");
+    console.log("\n📋 Routine Instructions:");
     console.log("=".repeat(50));
+    console.log(claudeMd);
 
-    for (const block of response.content) {
-      if (block.type === "text") {
-        console.log(block.text);
-      } else if (block.type === "thinking") {
-        console.log("\n💭 Claude's reasoning:", block.thinking.substring(0, 200) + "...");
-      }
-    }
+    console.log("\n📧 Email Organization Task:");
+    console.log("=".repeat(50));
+    console.log(`
+This routine should be executed by Claude with Gmail MCP connector enabled.
 
-    console.log("\n✅ Email Organization Routine Complete");
-    console.log(`📝 Stop reason: ${response.stop_reason}`);
+If running interactively in Claude Code:
+1. Claude will use the Gmail MCP tool to fetch unread emails from last 24 hours
+2. Emails will be classified according to the rules in CLAUDE.md
+3. Required labels will be created: "Confirmations", "Security Alerts"
+4. Appropriate actions will be taken:
+   - Important emails: kept in inbox (unread)
+   - Confirmations: archived with "Confirmations" label
+   - Security alerts: archived with "Security Alerts" label
+   - Social notifications: deleted
+   - Marketing/newsletters: archived (no label)
+5. All processed emails will be marked as read
+6. Summary statistics will be reported
 
-    // Log completion
+STATUS: Ready to process emails when Gmail MCP is connected.
+`);
+
+    // Log that routine is ready
     logToFile({
       timestamp: new Date().toISOString(),
-      status: "completed",
-      stopReason: response.stop_reason,
-      summary: "Email organization completed successfully",
+      status: "ready",
+      message: "Routine ready - waiting for Gmail MCP connector",
     });
+
+    console.log("✅ Routine initialized and ready");
+    console.log("📝 Awaiting Gmail MCP connector activation...");
   } catch (error) {
-    console.error("❌ Error during email organization:", error);
+    console.error("❌ Error during routine initialization:", error);
 
     logToFile({
       timestamp: new Date().toISOString(),
