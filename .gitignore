@@ -1,0 +1,5 @@
+node_modules/
+routine_logs.jsonl
+.env
+.env.local
+*.log
