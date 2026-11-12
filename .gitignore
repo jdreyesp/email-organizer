@@ -1,0 +1,6 @@
+node_modules/
+package-lock.json
+routine_logs.jsonl
+.env
+.DS_Store
+*.log
