@@ -1,0 +1,3 @@
+{"timestamp":"2026-11-13T05:07:46.950Z","status":"error","error":"Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted"}
+{"timestamp":"2026-11-13T05:08:28.385Z","status":"error","error":"Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted"}
+{"timestamp":"2026-11-13T05:07:50.000Z","status":"investigation_complete","finding":"Gmail MCP tools not available in current environment","recommendation":"Deploy as cloud routine with Gmail MCP connector enabled"}
