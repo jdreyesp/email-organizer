@@ -1,0 +1,1 @@
+{"timestamp":"2026-11-17T05:09:00Z","status":"incomplete","reason":"Gmail MCP tools not available","details":"Gmail connector connected but MCP tools still loading","emails_processed":0,"categories":{"important":0,"confirmations":0,"social_deleted":0,"marketing_archived":0},"error":"Gmail MCP server initialization delay - tools marked 'still connecting' at routine start"}
